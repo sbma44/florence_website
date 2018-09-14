@@ -57,6 +57,17 @@ hero.is-large .hero-body, .is-large.hero-home .hero-body {
 #map-container #map .mapboxgl-popup {
   max-width: 200px;
 }
+#map-container #map .mapboxgl-popup h2 {
+  font-weight: bold;
+  font-size: 1em;
+}
+#map-container #map .mapboxgl-popup .directions {
+  display: block;
+  float: right;
+}
+#map-container #map .mapboxgl-popup .note {
+  clear: both;
+}
 #map-container #filters {
   background-color: white;
   height: 24px;

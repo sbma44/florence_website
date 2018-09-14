@@ -67,7 +67,10 @@
                                 phone = shelters[i].phone.replace(/[^\d]/g, '');
                             var note = shelters[i].notes;
                             var petNote = shelters[i].pets_notes;
-                            var html = '<strong>' + shelters[i].shelter + '</strong><br/>' + shelters[i].address + '<br/><a href="tel:' + phone + '">' + shelters[i].phone + '</a>';
+                            var html = '<h2>' + shelters[i].shelter + '</h2>';
+                            if (shelters[i].address) html += '<div class="address">' + shelters[i].address + '</div>';
+                            if (phone) html += '<a class="phone" href="tel:' + phone + '">' + shelters[i].phone + '</a>';
+                            if (shelters[i].address) html += '<a class="directions" target="_blank" href="https://www.google.com/maps/dir/current+location/' + encodeURIComponent(shelters[i].address) + '">Directions</a>';
                             if (note) html += '<div class="note">' + note + '</div>';
                             if (petNote) html += '<div class="petNote">Pets: ' + petNote + '</div>';
                             var popup = new mapboxgl.Popup({ offset: 25 })
