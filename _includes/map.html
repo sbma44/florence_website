@@ -37,7 +37,11 @@
                                 active = s.needs.map(function(x) { return x.toLowerCase(); }).indexOf('supplies') !== -1;
                             else if(filterValue === 'special')
                                 active = s.special_needs;
-                            s.marker.getElement().className = active ? 'mapboxgl-marker marker' : 'mapboxgl-marker marker filtered';
+                            var el = s.marker.getElement();
+                            if (active && el && el.className)
+                                el.className = el.className.split(/\s+/).filter(function(x) { return x !== 'filtered'; }).join(' ');
+                            else
+                                el.className = Object.keys(el.className.split(/\s+/).reduce(function(prev, cur) { prev[cur] = true; return prev; }, { filtered: true })).join(' ');
                         });
                     }
 
