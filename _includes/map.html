@@ -62,8 +62,16 @@
                         for(var i = 0; i < shelters.length; i++) {
                             var el = document.createElement('div');
                             el.className = 'marker';
+                            var phone = shelters[i].cleanPhone.trim();
+                            if (((/[^\d]/.test(phone)) || (phone.replace(/0+/g, '').length === 0)) && shelters[i].phone)
+                                phone = shelters[i].phone.replace(/[^\d]/g, '');
+                            var note = shelters[i].notes;
+                            var petNote = shelters[i].pets_notes;
+                            var html = '<strong>' + shelters[i].shelter + '</strong><br/>' + shelters[i].address + '<br/><a href="tel:' + phone + '">' + shelters[i].phone + '</a>';
+                            if (note) html += '<div class="note">' + note + '</div>';
+                            if (petNote) html += '<div class="petNote">Pets: ' + petNote + '</div>';
                             var popup = new mapboxgl.Popup({ offset: 25 })
-                                .setHTML('<strong>' + shelters[i].shelter + '</strong><br/>' + shelters[i].address + '<br/><a href="tel:' + shelters[i].cleanPhone + '">' + shelters[i].phone + '</a>');
+                                .setHTML(html);
                             shelters[i].marker = new mapboxgl.Marker(el)
                                 .setLngLat([shelters[i].longitude, shelters[i].latitude])
                                 .setPopup(popup)
